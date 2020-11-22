@@ -8,8 +8,8 @@ def getData():
   Y = []
   void_label = -1
 
-  train_path = r'C:\Users\Akhilash\Desktop\BackgroundSubtraction\unet\new'
-  label_path = r'C:\Users\Akhilash\Desktop\BackgroundSubtraction\FgSegNet_v2-master\training_sets\CDnet2014_train\baseline\highway200'
+  train_path = '/content/input'
+  label_path = '/content/highway200'
 
   train_files = sorted(os.listdir(train_path))
   label_files = sorted(os.listdir(label_path))
