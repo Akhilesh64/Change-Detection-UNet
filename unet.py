@@ -1,6 +1,5 @@
 import numpy as np 
 import os
-import tensorflow as tf
 from keras.models import Model
 from keras.layers import *
 from keras.optimizers import *
@@ -79,15 +78,15 @@ model = Model(inputs = net_input, outputs = model_output)
 
 # opt = RMSprop(lr = 1e-4, rho=0.9, epsilon=1e-08, decay=0.)
 
-model.compile(optimizer = Adam(lr = 1e-5), loss = loss, metrics = [acc])
+model.compile(optimizer = Adam(lr = 5e-4), loss = loss, metrics = [acc])
 
-early = EarlyStopping(monitor='val_loss', min_delta=1e-4, patience=20, verbose=0, mode='auto')
+early = EarlyStopping(monitor='val_loss', min_delta=1e-4, patience=15, verbose=0, mode='auto')
 
-redu = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, verbose=1, mode='auto')
+redu = ReduceLROnPlateau(monitor='val_loss', factor=0.05, patience=5, verbose=1, mode='auto')
 
-save = ModelCheckpoint('model.h5', save_best_only=True, monitor='val_loss', mode='min')
+# save = ModelCheckpoint('model.h5', save_best_only=True, monitor='val_loss', mode='min')
 
 data = getData()
 
-model.fit(data[0], data[1], validation_split = 0.1, epochs = 300, batch_size = 1, callbacks = [redu], verbose=1, shuffle = True)
+model.fit(data[0], data[1], validation_split = 0.1, epochs = 500, batch_size = 1, callbacks = [early, redu], verbose=1, shuffle = True)
 model.save('model.h5')
