@@ -23,7 +23,7 @@ def unet(x):
     x = MaxPooling2D(pool_size=(2, 2), name = 'block3_pool')(conv3)
     
     x = Conv2D(512, 3, activation = 'relu', padding = 'same', name = 'block4_conv1')(x)
-    x = Conv2D(512, 3, activation = 'relu', padding = 'same', , name = 'block4_conv2')(x)
+    x = Conv2D(512, 3, activation = 'relu', padding = 'same', name = 'block4_conv2')(x)
     drop4 = Dropout(0.5, name = 'dr4')(x)
     x = MaxPooling2D(pool_size=(2, 2), name = 'block4_pool')(drop4)
 
@@ -34,7 +34,7 @@ def unet(x):
     x = UpSampling2D(size = (2,2), name = 'up6')(x)
     x = Conv2D(512, 2, activation = 'relu', padding = 'same', name = 'block6_conv1')(x)
     x = concatenate([drop4, x], axis = 3)
-    x = Conv2D(512, 3, activation = 'relu', padding = 'same', , name = 'block6_conv2')(x)
+    x = Conv2D(512, 3, activation = 'relu', padding = 'same', name = 'block6_conv2')(x)
     x = Conv2D(512, 3, activation = 'relu', padding = 'same', name = 'block6_conv3')(x)
 
     x = UpSampling2D(size = (2,2), name = 'up7')(x)
