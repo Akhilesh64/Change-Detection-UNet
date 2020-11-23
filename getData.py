@@ -19,7 +19,7 @@ def getData():
     img = img_to_array(img)
     X.append(img)
 
-    img = load_img(os.path.join(label_path, label_files[i]), grayscale = True)
+    img = load_img(os.path.join(label_path, label_files[i]), color_mode = 'grayscale')
     img = img_to_array(img)
     shape = img.shape
     img /= 255.0
