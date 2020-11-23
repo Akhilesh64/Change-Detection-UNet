@@ -1,11 +1,10 @@
 import numpy as np 
 import os
-from keras.models import Model
-from keras.layers import *
-from keras.optimizers import *
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import *
+from tensorflow.keras.optimizers import *
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
-from keras import backend as K
-import tensorflow as tf
+from tensorflow.keras import backend as K
 from getData import getData 
 
 def unet(x):
@@ -90,9 +89,7 @@ model.compile(optimizer = opt, loss = loss, metrics = [acc])
 
 early = EarlyStopping(monitor='val_loss', min_delta=1e-4, patience=15, verbose=0, mode='auto')
 
-redu = ReduceLROnPlateau(monitor='val_loss', factor=0.05, patience=5, verbose=1, mode='auto')
-
-# save = ModelCheckpoint('model.h5', save_best_only=True, monitor='val_loss', mode='min')
+redu = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, verbose=1, mode='auto')
 
 data = getData()
 
